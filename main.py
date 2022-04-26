@@ -30,9 +30,15 @@ def index():
     kaspersky_news = feedparser.parse("https://threatpost.com/feed/")  
     kaspersky_entry = kaspersky_news.entries[0:4]
 
+    cisa_titles = []
+    clean = re.compile('<.*?>') 
     cisa_alerts = feedparser.parse("https://www.cisa.gov/uscert/ncas/all.xml")
     cisa_entry = cisa_alerts.entries[0:5]
 
+    for e in range(0, len(cisa_entry)):
+        title = re.sub(clean, "", cisa_entry[e].title)
+        cisa_titles.append(title)
+    
     return render_template("index.html",krebs_entry = krebs_entry,
                                         thn_entry = thn_entry,
                                         darkr_entry = darkr_entry,
@@ -41,7 +47,8 @@ def index():
                                         mandiant_entry = mandiant_entry,
                                         bleeping_entry = bleeping_entry,
                                         kaspersky_entry = kaspersky_entry,
-                                        cisa_entry = cisa_entry)
+                                        cisa_entry = cisa_entry,
+                                        cisa_titles = cisa_titles)
 
 if __name__ == '__main__':
    app.run(host="0.0.0.0")
