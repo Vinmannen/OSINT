@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <title>Project</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script type="text/javascript" src="static/clocks.js"></script>
+</head>
+
+<body>
+    <div class="topNav">
+        <a href="https://krebsonsecurity.com/">Krebs on Security</a>
+        <a href="https://thehackernews.com/">The Hacker News</a>
+        <a href="https://www.darkreading.com/">Dark Reading</a>
+        <a href="https://blog.talosintelligence.com/">Talos Intelligence</a>
+        <a href="https://nakedsecurity.sophos.com/">Naked Security</a>
+        <a href="https://www.mandiant.com/resources/blog">Mandiant Blog</a>
+        <a href="https://www.bleepingcomputer.com/">Bleeping Computer</a>
+        <a href="https://securelist.com/">Securelist</a>
+    </div>
+
+    <div class="worldClocks">
+        <div class="clockWrapper">
+            <h1>Oslo<br></h1>
+            <h2><span class="clock" data-timezone="Europe/Oslo"></span></h2>
+        </div>
+        <div class="clockWrapper">
+            <h1>New York<br></h1>
+            <h2><span class="clock" data-timezone="America/New_York"></span></h2>
+        </div>
+        <div class="clockWrapper">
+            <h1>Shanghai<br></h1>
+            <h2><span class="clock" data-timezone="Asia/Shanghai"></span></h2>
+        </div>
+        <div class="clockWrapper">
+            <h1>Moscow<br></h1>
+            <h2><span class="clock" data-timezone="Europe/Moscow"></span></h2>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div class="twitterBox"></div>
+      <div class="twitterBox-analysts">
+
+      </div>
+      <div class="twitterBox-cve">
+        
+      </div>
+      <div class="twitterBox-ph">
+        
+      </div>
+    </div>
+
+    <div class="newsBox">
+        <div class="entry">
+            <h1>Krebs on Security</h1>
+              {%for i in krebs_entry%}
+              <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+              <h4>{{i.published[0:25]}}</h4>
+              <p>{{i.summary[0:180] + "..."}}</p>
+              <br/> 
+              {%endfor%}
+        </div>
+    
+        <div class="entry">
+            <h1>The Hacker News</h1>
+            {%for i in thn_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{i.summary[0:180] + "..."}}</p>
+             <br/> 
+               {%endfor%}
+        </div>
+    
+        <div class="entry">
+            <h1>Dark Reading</h1>
+            {%for i in darkr_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{i.summary[0:180] + "..."}}</p>
+             <br/> 
+               {%endfor%}
+        </div>
+    
+        <div class="entry">
+            <h1>Talos Intelligence</h1>
+            {%for i in talos_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{i.summary[0:180] + "..."}}</p>
+             <br/> 
+               {%endfor%}
+        </div>
+    
+        <div class="entry">
+            <h1>Naked Security</h1>
+            {%for i in nakedsec_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{i.summary[0:180] + "..."}}</p>
+             <br/> 
+               {%endfor%}
+        </div>
+       
+        <div class="entry">
+            <h1>Mandiant</h1>
+            {%for i in mandiant_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{i.summary[0:180].replace("<p>", "").replace("</p>", "") + "..."}}</p>
+             <br/> 
+               {%endfor%}
+        </div>
+    
+        <div class="entry">
+            <h1>Bleeping Computer</h1>
+            {%for i in bleeping_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{i.summary}}</p>
+             <br/> 
+               {%endfor%}
+        </div>
+    
+        <div class="entry">
+            <h1>Securelist</h1>
+            {%for i in kaspersky_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{i.summary}}</p>
+             <br/> 
+               {%endfor%}
+        </div>
+    </div>
+
+    <div class="cisaAlerts">
+            <h1>CISA Feed</h1>
+        <div class="cisaWrapper">
+            {%for i in cisa_entry%}
+            <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+            <h4>{{i.published}}</h4>
+            <br/> 
+            {%endfor%}
+        </div>
+    </div>
+    </div>
+
+    <div class="cves">
+        <div class="highSeverity">
+        </div>
+        <div class="medSeverity">
+        </div>
+        <div class="lowSeverity">
+        </div>
+    </div>
+</body>
+</html>
