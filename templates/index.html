@@ -136,12 +136,12 @@
     </div>
 
     <div class="cisaAlerts">
-            <h1>CISA Feed</h1>
+            <h1>News From CISA</h1>
         <div class="cisaWrapper">
             {%for i in cisa_entry%}
-            <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+            <h3><a href="{{i.link}}">{{cisa_titles[loop.index0]}}</a></h3>
             <h4>{{i.published}}</h4>
-            <br/> 
+            <br/>
             {%endfor%}
         </div>
     </div>
