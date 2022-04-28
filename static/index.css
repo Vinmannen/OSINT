@@ -84,28 +84,37 @@ body{
 }
 
 .cves {
+    float: left;
+    margin:0 auto;
     width: 100%;
+}
+
+.highSeverity {
+    border: 2px solid red;
+    width: 30%;
     height: 500px;
     float: left;
+    text-align: left;
+    margin: 15px;
+    overflow:auto;
 }
 
-.cves .highSeverity {
-    background-color: rgb(255, 0, 0);
-    width: 33%;
-    height: 100%;
+.medSeverity {
+    border: 2px solid orange;
+    width: 30%;
+    height: 500px;
     float: left;
+    text-align: left;
+    margin: 15px;
+    overflow:auto;
 }
 
-.cves .medSeverity {
-    background-color: rgb(255, 208, 0);
-    width: 34%;
-    height: 100%;
+.lowSeverity {
+    border: 2px solid green;
+    width: 30%;
+    height: 500px;
     float: left;
-}
-
-.cves .lowSeverity {
-    background-color: rgb(21, 255, 0);
-    width: 33%;
-    height: 100%;
-    float: left;
+    text-align: left;
+    margin: 15px;
+    overflow:auto;
 }
