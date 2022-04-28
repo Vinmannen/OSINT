@@ -1,6 +1,10 @@
 
 from flask import Flask, render_template
 import feedparser
+import re
+from pycvesearch import CVESearch
+import nvdlib
+import datetime
 
 app = Flask(__name__)
 
@@ -39,6 +43,18 @@ def index():
         title = re.sub(clean, "", cisa_entry[e].title)
         cisa_titles.append(title)
     
+    end = datetime.datetime.now()
+    start = end - datetime.timedelta(days=7)
+    r = nvdlib.searchCVE(pubStartDate=start, pubEndDate=end)
+
+    cves = {}
+
+    for y in r:
+        cve_score = y.score[1]
+        cve_id = y.id
+        if cve_score != None:
+            cves.update({cve_id : cve_score})
+    
     return render_template("index.html",krebs_entry = krebs_entry,
                                         thn_entry = thn_entry,
                                         darkr_entry = darkr_entry,
@@ -48,7 +64,8 @@ def index():
                                         bleeping_entry = bleeping_entry,
                                         kaspersky_entry = kaspersky_entry,
                                         cisa_entry = cisa_entry,
-                                        cisa_titles = cisa_titles)
+                                        cisa_titles = cisa_titles,
+                                        cve_list = cves.items())
 
 if __name__ == '__main__':
    app.run(host="0.0.0.0")
