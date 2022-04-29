@@ -5,6 +5,25 @@ import re
 from pycvesearch import CVESearch
 import nvdlib
 import datetime
+'''
+end = datetime.datetime.now()
+start = end - datetime.timedelta(days=7)
+r = nvdlib.searchCVE(pubStartDate=start, pubEndDate=end)
+
+cves = {}
+
+for y in r:
+    cve_score = y.score[1]
+    cve_id = y.id
+    cve_pubDate = y.publishedDate
+    cve_url = y.url
+    cve_info = y.cve
+    if cve_score != None:
+        cves.update({cve_id : [cve_score, cve_pubDate, cve_url, cve_info.description.description_data[0].value]})
+
+print(cves.items())
+
+'''
 
 app = Flask(__name__)
 
@@ -34,15 +53,27 @@ def index():
     kaspersky_news = feedparser.parse("https://threatpost.com/feed/")  
     kaspersky_entry = kaspersky_news.entries[0:4]
 
-    cisa_titles = []
+    sentinelone_news = feedparser.parse("https://www.sentinelone.com/feed/")  
+    sentinelone_entry = sentinelone_news.entries[0:4]
+
+    therecord_news = feedparser.parse("https://therecord.media/feed/")  
+    therecord_entry = therecord_news.entries[0:4]
+
+    therecord_summary = []
     clean = re.compile('<.*?>') 
+
+    for w in range(0, len(therecord_entry)):
+        summ = re.sub(clean, "", therecord_entry[w].summary)
+        therecord_summary.append(summ[0:180])
+
+    cisa_titles = []
     cisa_alerts = feedparser.parse("https://www.cisa.gov/uscert/ncas/all.xml")
     cisa_entry = cisa_alerts.entries[0:5]
 
     for e in range(0, len(cisa_entry)):
         title = re.sub(clean, "", cisa_entry[e].title)
         cisa_titles.append(title)
-    
+
     end = datetime.datetime.now()
     start = end - datetime.timedelta(days=7)
     r = nvdlib.searchCVE(pubStartDate=start, pubEndDate=end)
@@ -52,9 +83,13 @@ def index():
     for y in r:
         cve_score = y.score[1]
         cve_id = y.id
+        cve_pubDate = y.publishedDate
+        cve_lastmod = y.lastModifiedDate
+        cve_url = y.url
+        cve_info = y.cve
         if cve_score != None:
-            cves.update({cve_id : cve_score})
-    
+            cves.update({cve_id : [cve_score, cve_pubDate[0:9], cve_lastmod[0:9], cve_url, cve_info.description.description_data[0].value]})
+
     return render_template("index.html",krebs_entry = krebs_entry,
                                         thn_entry = thn_entry,
                                         darkr_entry = darkr_entry,
@@ -65,7 +100,10 @@ def index():
                                         kaspersky_entry = kaspersky_entry,
                                         cisa_entry = cisa_entry,
                                         cisa_titles = cisa_titles,
+                                        therecord_entry = therecord_entry,
+                                        therecord_summary = therecord_summary,
+                                        sentinelone_entry = sentinelone_entry,
                                         cve_list = cves.items())
 
 if __name__ == '__main__':
-   app.run(host="0.0.0.0")
+   app.run(host="0.0.0.0") 
