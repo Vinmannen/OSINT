@@ -5,25 +5,6 @@ import re
 from pycvesearch import CVESearch
 import nvdlib
 import datetime
-'''
-end = datetime.datetime.now()
-start = end - datetime.timedelta(days=7)
-r = nvdlib.searchCVE(pubStartDate=start, pubEndDate=end)
-
-cves = {}
-
-for y in r:
-    cve_score = y.score[1]
-    cve_id = y.id
-    cve_pubDate = y.publishedDate
-    cve_url = y.url
-    cve_info = y.cve
-    if cve_score != None:
-        cves.update({cve_id : [cve_score, cve_pubDate, cve_url, cve_info.description.description_data[0].value]})
-
-print(cves.items())
-
-'''
 
 app = Flask(__name__)
 
