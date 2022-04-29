@@ -71,6 +71,7 @@ body{
     box-sizing:border-box;
     float: right;
     text-align: center;
+    margin-top: 50px;
 }
 
 .cisaAlerts .cisaWrapper {
@@ -87,6 +88,11 @@ body{
     float: left;
     margin:0 auto;
     width: 100%;
+}
+
+.cves a {
+    text-decoration: underline;
+    color: #ffffff;
 }
 
 .highSeverity {
