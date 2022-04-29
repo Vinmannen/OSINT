@@ -18,6 +18,8 @@
         <a href="https://www.mandiant.com/resources/blog">Mandiant Blog</a>
         <a href="https://www.bleepingcomputer.com/">Bleeping Computer</a>
         <a href="https://securelist.com/">Securelist</a>
+        <a href="https://www.sentinelone.com/blog/">SentinelOne</a>
+        <a href="https://therecord.media/">The Record</a>
     </div>
 
     <div class="worldClocks">
@@ -59,7 +61,7 @@
               {%for i in krebs_entry%}
               <h3><a href="{{i.link}}">{{i.title}}</a></h3>
               <h4>{{i.published[0:25]}}</h4>
-              <p>{{i.summary[0:180] + "..."}}</p>
+              <p>{{i.summary[0:180]}}[...]</p>
               <br/> 
               {%endfor%}
         </div>
@@ -69,7 +71,7 @@
             {%for i in thn_entry%}
              <h3><a href="{{i.link}}">{{i.title}}</a></h3>
              <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180] + "..."}}</p>
+             <p>{{i.summary[0:180]}}[...]</p>
              <br/> 
                {%endfor%}
         </div>
@@ -79,7 +81,7 @@
             {%for i in darkr_entry%}
              <h3><a href="{{i.link}}">{{i.title}}</a></h3>
              <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180] + "..."}}</p>
+             <p>{{i.summary[0:180]}}[...]</p>
              <br/> 
                {%endfor%}
         </div>
@@ -89,7 +91,7 @@
             {%for i in talos_entry%}
              <h3><a href="{{i.link}}">{{i.title}}</a></h3>
              <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180] + "..."}}</p>
+             <p>{{i.summary[0:180]}}[...]</p>
              <br/> 
                {%endfor%}
         </div>
@@ -99,7 +101,7 @@
             {%for i in nakedsec_entry%}
              <h3><a href="{{i.link}}">{{i.title}}</a></h3>
              <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180] + "..."}}</p>
+             <p>{{i.summary[0:180]}}[...]</p>
              <br/> 
                {%endfor%}
         </div>
@@ -109,7 +111,7 @@
             {%for i in mandiant_entry%}
              <h3><a href="{{i.link}}">{{i.title}}</a></h3>
              <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180].replace("<p>", "").replace("</p>", "") + "..."}}</p>
+             <p>{{i.summary[0:180].replace("<p>", "").replace("</p>", "").replace("<span>", "").replace("</span>", "")}}[...]</p>
              <br/> 
                {%endfor%}
         </div>
@@ -119,7 +121,7 @@
             {%for i in bleeping_entry%}
              <h3><a href="{{i.link}}">{{i.title}}</a></h3>
              <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary}}</p>
+             <p>{{i.summary[0:180]}}[...]</p>
              <br/> 
                {%endfor%}
         </div>
@@ -129,10 +131,30 @@
             {%for i in kaspersky_entry%}
              <h3><a href="{{i.link}}">{{i.title}}</a></h3>
              <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary}}</p>
+             <p>{{i.summary[0:180]}}[...]</p>
              <br/> 
                {%endfor%}
         </div>
+
+         <div class="entry">
+            <h1>SentinelOne</h1>
+            {%for i in sentinelone_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{i.summary[0:180]}}[...]</p>
+             <br/> 
+               {%endfor%}
+        </div>
+
+        <div class="entry">
+            <h1>The Record</h1>
+            {%for i in therecord_entry%}
+             <h3><a href="{{i.link}}">{{i.title}}</a></h3>
+             <h4>{{i.published[0:25]}}</h4>
+             <p>{{therecord_summary[loop.index0]}}[...]</p>
+             <br/> 
+               {%endfor%}
+        </div>       
     </div>
 
     <div class="cisaAlerts">
@@ -151,27 +173,36 @@
         <div class="lowSeverity">
         <h1 style="text-align: center;">Low Severity (1.0 - 4.9)</h1>
             {% for i in cve_list%}
-                {% if i[1]  >= 4.9 and i[1] <= 1.0 %}
-                <h2>ID: {{ i[0] }}</h2>
-                <p>Score: {{ i[1] }}</p>
+                {% if i[1][0]  >= 4.9 and i[1][0] <= 1.0 %}
+                <h2><a href="{{i[1][3]}}">ID: {{ i[0] }}</a></h2>
+                <p>Published: {{i[1][1]}}</p>
+                <p>Last modified: {{i[1][2]}}</p>
+                <p>Score: {{ i[1][0] }}</p>
+                <p>Description: {{i[1][4]}}</p>
                 {% endif %}
             {% endfor %}
         </div>
         <div class="medSeverity">
             <h1 style="text-align: center;">Medium Severity (5.0 - 8.9)</h1>
             {% for i in cve_list%}
-                {% if i[1]  >= 5.0 and i[1] <= 8.9 %}
-                <h2>ID: {{ i[0] }}</h2>
-                <p>Score: {{ i[1] }}</p>
+                {% if i[1][0]  >= 5.0 and i[1][0] <= 8.9 %}
+                <h2><a href="{{i[1][3]}}">ID: {{ i[0] }}</a></h2>
+                <p>Published: {{i[1][1]}}</p>
+                <p>Last modified: {{i[1][2]}}</p>
+                <p>Score: {{ i[1][0] }}</p>
+                <p>Description: {{i[1][4]}}</p>
                 {% endif %}
             {% endfor %}
         </div>
         <div class="highSeverity">
             <h1 style="text-align: center;">High Severity (>9.0)</h1>
             {% for i in cve_list%}
-                {% if i[1]  >= 9.0 and i[1] <= 10.0 %}
-                <h2>ID: {{ i[0] }}</h2>
-                <p>Score: {{ i[1] }}</p>
+                {% if i[1][0]  >= 9.0 and i[1][0] <= 10.0 %}
+                <h2><a href="{{i[1][3]}}">ID: {{ i[0] }}</a></h2>
+                <p>Published: {{i[1][1]}}</p>
+                <p>Last modified: {{i[1][2]}}</p>
+                <p>Score: {{ i[1][0] }}</p>
+                <p>Description: {{i[1][4]}}</p>
                 {% endif %}
             {% endfor %}
         </div>
