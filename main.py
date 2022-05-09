@@ -5,11 +5,38 @@ import re
 from pycvesearch import CVESearch
 import nvdlib
 import datetime
+import tweepy
+import configparser
+'''
+#configparser instance
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+#user/access token from config.api
+api_key = config["twitter"]["api_key"].strip('"')
+api_key_secret = config["twitter"]["api_key_secret"].strip('"')
+
+access_token = config["twitter"]["access_token"].strip('"')
+access_token_secret = config["twitter"]["access_token_secret"].strip('"')
+
+#handler for authentication
+auth_handler = tweepy.OAuthHandler(api_key, api_key_secret)
+auth_handler.set_access_token(access_token, access_token_secret)
+
+#api handler
+api= tweepy.API(auth_handler)
+
+public_tweets = api.home_timeline()
+'''
+
+
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+
+    #pull data from different RSS feeds
     krebs_news = feedparser.parse("https://krebsonsecurity.com/feed/")
     krebs_entry = krebs_news.entries[0:4]
 
@@ -40,6 +67,7 @@ def index():
     therecord_news = feedparser.parse("https://therecord.media/feed/")  
     therecord_entry = therecord_news.entries[0:4]
 
+    #some extra work to cut out the HTML tags
     therecord_summary = []
     clean = re.compile('<.*?>') 
 
@@ -69,7 +97,7 @@ def index():
         cve_url = y.url
         cve_info = y.cve
         if cve_score != None:
-            cves.update({cve_id : [cve_score, cve_pubDate[0:9], cve_lastmod[0:9], cve_url, cve_info.description.description_data[0].value]})
+            cves.update({cve_id : [cve_score, cve_pubDate[0:10], cve_lastmod[0:10], cve_url, cve_info.description.description_data[0].value]})
 
     return render_template("index.html",krebs_entry = krebs_entry,
                                         thn_entry = thn_entry,
@@ -87,4 +115,4 @@ def index():
                                         cve_list = cves.items())
 
 if __name__ == '__main__':
-   app.run(host="0.0.0.0") 
+   app.run(host="0.0.0.0")
