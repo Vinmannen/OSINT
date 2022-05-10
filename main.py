@@ -5,31 +5,7 @@ import re
 from pycvesearch import CVESearch
 import nvdlib
 import datetime
-import tweepy
-import configparser
-'''
-#configparser instance
-config = configparser.ConfigParser()
-config.read("config.ini")
-
-#user/access token from config.api
-api_key = config["twitter"]["api_key"].strip('"')
-api_key_secret = config["twitter"]["api_key_secret"].strip('"')
-
-access_token = config["twitter"]["access_token"].strip('"')
-access_token_secret = config["twitter"]["access_token_secret"].strip('"')
-
-#handler for authentication
-auth_handler = tweepy.OAuthHandler(api_key, api_key_secret)
-auth_handler.set_access_token(access_token, access_token_secret)
-
-#api handler
-api= tweepy.API(auth_handler)
-
-public_tweets = api.home_timeline()
-'''
-
-
+import snscrape.modules.twitter as sntwitter
 
 app = Flask(__name__)
 
@@ -99,6 +75,17 @@ def index():
         if cve_score != None:
             cves.update({cve_id : [cve_score, cve_pubDate[0:10], cve_lastmod[0:10], cve_url, cve_info.description.description_data[0].value]})
 
+
+    query = "(@cyb3rops OR @blackorbird OR cve OR vulnerability OR infosec OR @cisagov OR cybersec OR @siedlmar OR rce OR natsec)"
+    tweets = {}
+    count = 0
+    for tweet in sntwitter.TwitterSearchScraper(query).get_items():
+        tweets.update({tweet.user.username : [tweet.date, tweet.url, tweet.content, tweet.user.profileImageUrl]})
+        count += 1
+        if count == 7:
+            break
+            
+
     return render_template("index.html",krebs_entry = krebs_entry,
                                         thn_entry = thn_entry,
                                         darkr_entry = darkr_entry,
@@ -112,7 +99,8 @@ def index():
                                         therecord_entry = therecord_entry,
                                         therecord_summary = therecord_summary,
                                         sentinelone_entry = sentinelone_entry,
-                                        cve_list = cves.items())
+                                        cve_list = cves.items(),
+                                        twitter_feed = tweets.items())
 
 if __name__ == '__main__':
    app.run(host="0.0.0.0")
