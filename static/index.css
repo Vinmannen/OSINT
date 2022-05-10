@@ -120,6 +120,35 @@ body::-webkit-scrollbar-thumb {
     box-sizing:border-box;
     float: right;
     overflow: auto;
+    color: black;
+}
+
+.twitterBox a {
+    text-decoration: none;
+    color: black;
+}
+
+.TwitterBox p {
+    color: black;
+}
+
+.twitterBox img {
+    float: right;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.twitterBox h1 {
+    float: middle;
+    margin-left: 2%;
+    color: rgb(29, 161, 242);
+    font-size: 60px;
+}
+
+.twitterBox h2{
+    margin-top: 50px;
+    color: rgb(29, 161, 242)
 }
 
 .twitterBox::-webkit-scrollbar-track{
@@ -138,20 +167,6 @@ body::-webkit-scrollbar-thumb {
   background-image: -webkit-gradient(linear, 0 0, 0 100%,
                      color-stop(.5, rgba(255, 255, 255, .2)),
              color-stop(.5, transparent), to(transparent));
-}
-
-.twitterBox img {
-    float: right;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.twitterBox h1 {
-    float: middle;
-    margin-left: 2%;
-    color: rgb(29, 161, 242);
-    font-size: 60px;
 }
 
 .cisaAlerts {
