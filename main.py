@@ -9,6 +9,19 @@ import snscrape.modules.twitter as sntwitter
 
 app = Flask(__name__)
 
+@app.route("/tweetfeed", methods=["POST", "GET"])
+def tweetfeed():
+    query = "(@cyb3rops OR @blackorbird OR cve OR vulnerability OR infosec OR @cisagov OR cybersec OR @siedlmar OR rce OR natsec)"
+    tweets = {}
+    count = 0
+    for tweet in sntwitter.TwitterSearchScraper(query).get_items():
+        tweets.update({tweet.user.username : [tweet.date, tweet.url, tweet.content, tweet.user.profileImageUrl]})
+        count += 1
+        if count == 7:
+            break
+    return tweets.items()
+
+
 @app.route('/')
 def index():
 
@@ -74,18 +87,9 @@ def index():
         cve_info = y.cve
         if cve_score != None:
             cves.update({cve_id : [cve_score, cve_pubDate[0:10], cve_lastmod[0:10], cve_url, cve_info.description.description_data[0].value]})
-
-
-    query = "(@cyb3rops OR @blackorbird OR cve OR vulnerability OR infosec OR @cisagov OR cybersec OR @siedlmar OR rce OR natsec)"
-    tweets = {}
-    count = 0
-    for tweet in sntwitter.TwitterSearchScraper(query).get_items():
-        tweets.update({tweet.user.username : [tweet.date, tweet.url, tweet.content, tweet.user.profileImageUrl]})
-        count += 1
-        if count == 7:
-            break
-            
-
+    
+    twitter_feed = tweetfeed()
+    
     return render_template("index.html",krebs_entry = krebs_entry,
                                         thn_entry = thn_entry,
                                         darkr_entry = darkr_entry,
@@ -100,7 +104,7 @@ def index():
                                         therecord_summary = therecord_summary,
                                         sentinelone_entry = sentinelone_entry,
                                         cve_list = cves.items(),
-                                        twitter_feed = tweets.items())
+                                        twitter_feed = twitter_feed)
 
 if __name__ == '__main__':
    app.run(host="0.0.0.0")
