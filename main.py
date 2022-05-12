@@ -2,7 +2,6 @@
 from flask import Flask, render_template
 import feedparser
 import re
-from pycvesearch import CVESearch
 import nvdlib
 import datetime
 import snscrape.modules.twitter as sntwitter
