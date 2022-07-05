@@ -6,7 +6,7 @@ body{
 }
 
 body::-webkit-scrollbar {
-  width: 2em;
+  width: 1.5em;
 }
 
 body::-webkit-scrollbar-track {
@@ -17,22 +17,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: #555;
-}
-
-.topNav{
-    overflow: hidden;
-    text-align: center;
-    padding-bottom: 50px;
-}
-
-.topNav a{
-    border: 1px solid rgb(255, 255, 255);
-    color: white;
-    text-align: center;
-    padding: 20px 20px;
-    text-decoration: none;
-    font-size: 30px;
-    display: inline-block;
 }
 
 .clock_header hr{
@@ -54,8 +38,8 @@ body::-webkit-scrollbar-thumb {
 
 .worldClocks .clockWrapper{
     border: 1px solid white;
-    padding: 50px;
-    margin-bottom: 20px;
+    padding: 20px;
+    margin-bottom: 10px;
     flex: 1 1 0;
     width: 0;
     overflow: auto;
@@ -79,6 +63,24 @@ body::-webkit-scrollbar-thumb {
   font-size: 50px;
 }
 
+.newsBox .entry {
+    width: 40%;
+    height: 360px;
+    float: left;
+    margin: 15px;
+    text-align: center;
+    overflow:auto;
+}
+
+.newsBox a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.newsBox h1 {
+    text-decoration: underline;
+}
+
 .newsBox .entry::-webkit-scrollbar-track{
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   border-radius: 10px;
@@ -94,21 +96,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: #555;
-}
-
-.newsBox .entry {
-    border: 2px solid rgb(255, 255, 255);
-    width: 40%;
-    height: 500px;
-    float: left;
-    text-align: center;
-    margin: 15px;
-    overflow:auto;
-}
-
-.newsBox a {
-    text-decoration: underline;
-    color: #ffffff;
 }
 
 .twitterBox {
