@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route("/tweetfeed", methods=["POST", "GET"])
 def tweetfeed():
-    query = "(@cyb3rops OR @blackorbird OR cve OR vulnerability OR infosec OR @cisagov OR cybersec OR @siedlmar OR rce OR natsec)"
+    query = "(@cyb3rops OR @blackorbird OR cve OR infosec OR @cisagov OR cybersec OR @siedlmar OR rce OR natsec)"
     tweets = {}
     count = 0
     for tweet in sntwitter.TwitterSearchScraper(query).get_items():
@@ -54,14 +54,6 @@ def index():
 
     therecord_news = feedparser.parse("https://therecord.media/feed/")  
     therecord_entry = therecord_news.entries[0:4]
-
-    #some extra work to cut out the HTML tags
-    therecord_summary = []
-    clean = re.compile('<.*?>') 
-
-    for w in range(0, len(therecord_entry)):
-        summ = re.sub(clean, "", therecord_entry[w].summary)
-        therecord_summary.append(summ[0:180])
 
     cisa_titles = []
     cisa_alerts = feedparser.parse("https://www.cisa.gov/uscert/ncas/all.xml")
