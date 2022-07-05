@@ -9,19 +9,6 @@
 </head>
 
 <body>
-    <div class="topNav">
-        <a href="https://krebsonsecurity.com/">Krebs on Security</a>
-        <a href="https://thehackernews.com/">The Hacker News</a>
-        <a href="https://www.darkreading.com/">Dark Reading</a>
-        <a href="https://blog.talosintelligence.com/">Talos Intelligence</a>
-        <a href="https://nakedsecurity.sophos.com/">Naked Security</a>
-        <a href="https://www.mandiant.com/resources/blog">Mandiant Blog</a>
-        <a href="https://www.bleepingcomputer.com/">Bleeping Computer</a>
-        <a href="https://securelist.com/">Securelist</a>
-        <a href="https://www.sentinelone.com/blog/">SentinelOne</a>
-        <a href="https://therecord.media/">The Record</a>
-    </div>
-
     <div class="clock_header">
         <h1>World Clocks</h1>
         <hr>
@@ -64,102 +51,72 @@
 
     <div class="newsBox">
         <div class="entry">
-            <h1>Krebs on Security</h1>
-              {%for i in krebs_entry%}
-              <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-              <h4>{{i.published[0:25]}}</h4>
-              <p>{{i.summary[0:180]}}[...]</p>
-              <br/> 
+            <h1><a href="https://krebsonsecurity.com/">Krebs on Security</a></h1>
+            {%for i in krebs_entry%}
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
               {%endfor%}
         </div>
     
         <div class="entry">
-            <h1>The Hacker News</h1>
+            <h1><a href="https://thehackernews.com/">The Hacker News</a></h1>
             {%for i in thn_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180]}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>
     
         <div class="entry">
-            <h1>Dark Reading</h1>
+            <h1><a href="https://www.darkreading.com/">Dark Reading</a></h1>
             {%for i in darkr_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180]}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>
     
         <div class="entry">
-            <h1>Talos Intelligence</h1>
+            <h1><a href="https://blog.talosintelligence.com/">Talos Intelligence</a></h1>
             {%for i in talos_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180]}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>
     
         <div class="entry">
-            <h1>Naked Security</h1>
+            <h1><a href="https://nakedsecurity.sophos.com/">Naked Security</a></h1>
             {%for i in nakedsec_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180]}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>
        
         <div class="entry">
-            <h1>Mandiant</h1>
+            <h1><a href="https://www.mandiant.com/resources/blog">Mandiant</a></h1>
             {%for i in mandiant_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180].replace("<p>", "").replace("</p>", "").replace("<span>", "").replace("</span>", "")}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>
     
         <div class="entry">
-            <h1>Bleeping Computer</h1>
+            <h1><a href="https://www.bleepingcomputer.com/">Bleeping Computer</a></h1>
             {%for i in bleeping_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180]}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>
     
         <div class="entry">
-            <h1>Securelist</h1>
+            <h1><a href="https://securelist.com/">Securelist</a></h1>
             {%for i in kaspersky_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180]}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>
 
          <div class="entry">
-            <h1>SentinelOne</h1>
+            <h1><a href="https://www.sentinelone.com/blog/">SentinelOne</a></h1>
             {%for i in sentinelone_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{i.summary[0:180]}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>
 
         <div class="entry">
-            <h1>The Record</h1>
+            <h1><a href="https://therecord.media/">The Record</a></h1>
             {%for i in therecord_entry%}
-             <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-             <h4>{{i.published[0:25]}}</h4>
-             <p>{{therecord_summary[loop.index0]}}[...]</p>
-             <br/> 
+            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
                {%endfor%}
         </div>       
     </div>
@@ -169,8 +126,8 @@
         <h1>From CISA</h1>
         <div class="cisaWrapper">
             {%for i in cisa_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{cisa_titles[loop.index0]}}</a></h3>
             <h4>{{i.published}}</h4>
+            <h3><a href="{{i.link}}" target="_blank">{{cisa_titles[loop.index0]}}</a></h3>
             <br/>
             {%endfor%}
         </div>
