@@ -93,7 +93,6 @@ def index():
                                         cisa_entry = cisa_entry,
                                         cisa_titles = cisa_titles,
                                         therecord_entry = therecord_entry,
-                                        therecord_summary = therecord_summary,
                                         sentinelone_entry = sentinelone_entry,
                                         cve_list = cves.items(),
                                         twitter_feed = twitter_feed)
