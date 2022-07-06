@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template
 import feedparser
 import re
@@ -14,11 +13,11 @@ def tweetfeed():
     tweets = {}
     count = 0
     for tweet in sntwitter.TwitterSearchScraper(query).get_items():
-        tweets.update({tweet.user.username : [tweet.date, tweet.url, tweet.content, tweet.user.profileImageUrl]})
+        tweets.update({tweet.user.username : [tweet.url, tweet.content]})
         count += 1
         if count == 7:
             break
-    return tweets.items()
+    return tweets
 
 
 @app.route('/')
@@ -59,7 +58,7 @@ def index():
     cisa_alerts = feedparser.parse("https://www.cisa.gov/uscert/ncas/all.xml")
     cisa_entry = cisa_alerts.entries[0:5]
     clean = re.compile('<.*?>')
-    
+
     for e in range(0, len(cisa_entry)):
         title = re.sub(clean, "", cisa_entry[e].title)
         cisa_titles.append(title)
