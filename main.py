@@ -3,22 +3,8 @@ import feedparser
 import re
 import nvdlib
 import datetime
-import snscrape.modules.twitter as sntwitter
 
 app = Flask(__name__)
-
-@app.route("/tweetfeed", methods=["POST", "GET"])
-def tweetfeed():
-    query = "(@cyb3rops OR @blackorbird OR cve OR infosec OR @cisagov OR cybersec OR @siedlmar OR rce OR natsec)"
-    tweets = {}
-    count = 0
-    for tweet in sntwitter.TwitterSearchScraper(query).get_items():
-        tweets.update({tweet.user.username : [tweet.url, tweet.content]})
-        count += 1
-        if count == 7:
-            break
-    return tweets
-
 
 @app.route('/')
 def index():
@@ -78,9 +64,7 @@ def index():
         cve_info = y.cve
         if cve_score != None:
             cves.update({cve_id : [cve_score, cve_pubDate[0:10], cve_lastmod[0:10], cve_url, cve_info.description.description_data[0].value]})
-    
-    twitter_feed = tweetfeed()
-    
+
     return render_template("index.html",krebs_entry = krebs_entry,
                                         thn_entry = thn_entry,
                                         darkr_entry = darkr_entry,
@@ -93,8 +77,7 @@ def index():
                                         cisa_titles = cisa_titles,
                                         therecord_entry = therecord_entry,
                                         sentinelone_entry = sentinelone_entry,
-                                        cve_list = cves.items(),
-                                        twitter_feed = twitter_feed)
+                                        cve_list = cves.items())
 
 if __name__ == '__main__':
    app.run(host="0.0.0.0")
