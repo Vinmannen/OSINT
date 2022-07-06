@@ -58,7 +58,8 @@ def index():
     cisa_titles = []
     cisa_alerts = feedparser.parse("https://www.cisa.gov/uscert/ncas/all.xml")
     cisa_entry = cisa_alerts.entries[0:5]
-
+    clean = re.compile('<.*?>')
+    
     for e in range(0, len(cisa_entry)):
         title = re.sub(clean, "", cisa_entry[e].title)
         cisa_titles.append(title)
