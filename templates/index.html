@@ -6,19 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <script type="text/javascript" src="static/clocks.js"></script>
-    <script type="text/javascript">
-        function updateTweets () {
-            let myRequest = new Request('/tweetfeed');
-            fetch(myRequest).then(response => response.json()).then(function (twitterBox) {
-                let bleh = document.getElementById("jallaTweets");
-                bleh.innerHTML = "";
-                for (let d in twitterBox) {
-                    bleh.innerHTML += `<h2>${d}</h2><a href="${twitterBox[d][0]}" target="_blank"><p>${twitterBox[d][1]}</p></a>`
-                }
-            });
-        }
-        setInterval(updateTweets, 10000);
-    </script>
 </head>
 
 <body>
@@ -46,18 +33,7 @@
         </div>
     </div>
 
-    <div style="clear: both;"></div>
-    <div class="twitterBox" id="twitterBox">
-        <img src="static/images/twitter_bird.png"/>
-        <h1>Twitter Feed</h1>
-        <div id="jallaTweets">
-        </div>
-    </div>
-
-    <div class="news_header">
-        <h1>Latest InfoSec News</h1>
-        <hr>
-    </div>
+    <a class="twitter-timeline" data-height="1000" data-width="30%" data-theme="dark" href="https://twitter.com/osintbotlol/lists/1544636277257019393?ref_src=twsrc%5Etfw">A Twitter List by osintbotlol</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
     <div class="newsBox">
