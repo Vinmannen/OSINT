@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <script type="text/javascript" src="static/clocks.js"></script>
+    <script type="text/javascript">
+        function updateTweets () {
+            let myRequest = new Request('/tweetfeed');
+            fetch(myRequest).then(response => response.json()).then(function (twitterBox) {
+                let bleh = document.getElementById("jallaTweets");
+                bleh.innerHTML = "";
+                for (let d in twitterBox) {
+                    bleh.innerHTML += `<h2>${d}</h2><a href="${twitterBox[d][0]}" target="_blank"><p>${twitterBox[d][1]}</p></a>`
+                }
+            });
+        }
+        setInterval(updateTweets, 10000);
+    </script>
 </head>
 
 <body>
@@ -37,10 +50,8 @@
     <div class="twitterBox" id="twitterBox">
         <img src="static/images/twitter_bird.png"/>
         <h1>Twitter Feed</h1>
-        {%for i in twitter_feed%}
-            <h2>@{{i[0]}}</h2>
-            <p><a href="{{i[1][1]}}">{{i[1][2]}}</a></p>
-        {%endfor%}
+        <div id="jallaTweets">
+        </div>
     </div>
 
     <div class="news_header">
