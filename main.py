@@ -42,7 +42,7 @@ def index():
 
     cisa_titles = []
     cisa_alerts = feedparser.parse("https://www.cisa.gov/uscert/ncas/all.xml")
-    cisa_entry = cisa_alerts.entries[0:5]
+    cisa_entry = cisa_alerts.entries[0:4]
     clean = re.compile('<.*?>')
 
     for e in range(0, len(cisa_entry)):
@@ -50,7 +50,7 @@ def index():
         cisa_titles.append(title)
 
     end = datetime.datetime.now()
-    start = end - datetime.timedelta(days=7)
+    start = end - datetime.timedelta(days=4)
     r = nvdlib.searchCVE(pubStartDate=start, pubEndDate=end)
 
     cves = {}
@@ -80,4 +80,4 @@ def index():
                                         cve_list = cves.items())
 
 if __name__ == '__main__':
-   app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0")

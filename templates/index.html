@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <script type="text/javascript" src="static/clocks.js"></script>
+    <script type="text/javascript" src="static/tabs.js"></script>
 </head>
 
 <body>
@@ -33,136 +34,147 @@
         </div>
     </div>
 
-    <a class="twitter-timeline" data-height="1000" data-width="30%" data-theme="dark" href="https://twitter.com/osintbotlol/lists/1544636277257019393?ref_src=twsrc%5Etfw">A Twitter List by osintbotlol</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-    <div class="newsBox">
-        <div class="entry">
-            <h1><a href="https://krebsonsecurity.com/">Krebs on Security</a></h1>
-            {%for i in krebs_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-              {%endfor%}
-        </div>
-    
-        <div class="entry">
-            <h1><a href="https://thehackernews.com/">The Hacker News</a></h1>
-            {%for i in thn_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>
-    
-        <div class="entry">
-            <h1><a href="https://www.darkreading.com/">Dark Reading</a></h1>
-            {%for i in darkr_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>
-    
-        <div class="entry">
-            <h1><a href="https://blog.talosintelligence.com/">Talos Intelligence</a></h1>
-            {%for i in talos_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>
-    
-        <div class="entry">
-            <h1><a href="https://nakedsecurity.sophos.com/">Naked Security</a></h1>
-            {%for i in nakedsec_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>
-       
-        <div class="entry">
-            <h1><a href="https://www.mandiant.com/resources/blog">Mandiant</a></h1>
-            {%for i in mandiant_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>
-    
-        <div class="entry">
-            <h1><a href="https://www.bleepingcomputer.com/">Bleeping Computer</a></h1>
-            {%for i in bleeping_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>
-    
-        <div class="entry">
-            <h1><a href="https://securelist.com/">Securelist</a></h1>
-            {%for i in kaspersky_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>
-
-         <div class="entry">
-            <h1><a href="https://www.sentinelone.com/blog/">SentinelOne</a></h1>
-            {%for i in sentinelone_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>
-
-        <div class="entry">
-            <h1><a href="https://therecord.media/">The Record</a></h1>
-            {%for i in therecord_entry%}
-            <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
-               {%endfor%}
-        </div>       
+    <div class="tab-buttons">
+        <button class="button" onclick="openSource('News')">News</button>
+        <button class="button" onclick="openSource('Socials')">Socials</button>
+        <button class="button" onclick="openSource('Vulnerabilities')">Latest Vulnerabilities</button>
     </div>
 
-    <div class="cisaAlerts">
-        <img src="static/images/CISA_logo.png"/>
-        <h1>From CISA</h1>
-        <div class="cisaWrapper">
-            {%for i in cisa_entry%}
-            <h4>{{i.published}}</h4>
-            <h3><a href="{{i.link}}" target="_blank">{{cisa_titles[loop.index0]}}</a></h3>
-            <br/>
-            {%endfor%}
+    <div id="News" class="source">
+        <div class="news_header">
+            <h1>The latest news</h1>
+            <hr>
+        </div>
+        <div class="newsBox">
+            <div class="entry">
+                <h1><a href="https://krebsonsecurity.com/">Krebs on Security</a></h1>
+                {%for i in krebs_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+        
+            <div class="entry">
+                <h1><a href="https://thehackernews.com/">The Hacker News</a></h1>
+                {%for i in thn_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+        
+            <div class="entry">
+                <h1><a href="https://www.darkreading.com/">Dark Reading</a></h1>
+                {%for i in darkr_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+        
+            <div class="entry">
+                <h1><a href="https://blog.talosintelligence.com/">Talos Intelligence</a></h1>
+                {%for i in talos_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+        
+            <div class="entry">
+                <h1><a href="https://nakedsecurity.sophos.com/">Naked Security</a></h1>
+                {%for i in nakedsec_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+        
+            <div class="entry">
+                <h1><a href="https://www.mandiant.com/resources/blog">Mandiant</a></h1>
+                {%for i in mandiant_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+        
+            <div class="entry">
+                <h1><a href="https://www.bleepingcomputer.com/">Bleeping Computer</a></h1>
+                {%for i in bleeping_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+        
+            <div class="entry">
+                <h1><a href="https://securelist.com/">Securelist</a></h1>
+                {%for i in kaspersky_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+
+            <div class="entry">
+                <h1><a href="https://www.sentinelone.com/blog/">SentinelOne</a></h1>
+                {%for i in sentinelone_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div>
+
+            <div class="entry">
+                <h1><a href="https://therecord.media/">The Record</a></h1>
+                {%for i in therecord_entry%}
+                <h3><a href="{{i.link}}" target="_blank">{{i.title}}</a></h3>
+                {%endfor%}
+            </div> 
+            <div class="entry">
+                <h1><a href="https://www.cisa.gov/uscert/ncas/current-activity">From CISA</a></h1>
+                    {%for i in cisa_entry%}
+                    <h3><a href="{{i.link}}" target="_blank">{{cisa_titles[loop.index0]}}</a></h3>
+                    {%endfor%}
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    <div style="clear: both;"></div>
-    
-    <div class="cve_header">
-        <h1>Latest CVEs From NVDLib</h1>
-        <hr>
+        
+    <div div id="Socials" class="source" style="display:none">
+        <div class="socials_header">
+            <h1>What's being talked about</h1>
+            <hr>
+        </div>
+        <a class="twitter-timeline" data-height="1000" data-width="30%" data-theme="dark" href="https://twitter.com/osintbotlol/lists/1544636277257019393?ref_src=twsrc%5Etfw">A Twitter List by osintbotlol</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
 
-    <div class="cves">
-        <div class="lowSeverity">
-        <h1 style="text-align: center;">Low Severity (1.0 - 4.9)</h1>
-            {% for i in cve_list%}
-                {% if i[1][0]  >= 4.9 and i[1][0] <= 1.0 %}
-                <h2><a href="{{i[1][3]}}" target="_blank">ID: {{ i[0] }}</a></h2>
-                <p>Published: {{i[1][1]}}</p>
-                <p>Last modified: {{i[1][2]}}</p>
-                <p>Score: {{ i[1][0] }}</p>
-                <p>Description: {{i[1][4]}}</p>
-                {% endif %}
-            {% endfor %}
+    <div id="Vulnerabilities" class="source" style="display:none">
+        <div class="cve_header">
+            <h1>Vulnerabilities from the past four days</h1>
+            <hr>
         </div>
-        <div class="medSeverity">
-            <h1 style="text-align: center;">Medium Severity (5.0 - 8.9)</h1>
-            {% for i in cve_list%}
-                {% if i[1][0]  >= 5.0 and i[1][0] <= 8.9 %}
-                <h2><a href="{{i[1][3]}}" target="_blank">ID: {{ i[0] }}</a></h2>
-                <p>Published: {{i[1][1]}}</p>
-                <p>Last modified: {{i[1][2]}}</p>
-                <p>Score: {{ i[1][0] }}</p>
-                <p>Description: {{i[1][4]}}</p>
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div class="highSeverity">
-            <h1 style="text-align: center;">High Severity (>9.0)</h1>
-            {% for i in cve_list%}
-                {% if i[1][0]  >= 9.0 and i[1][0] <= 10.0 %}
-                <h2><a href="{{i[1][3]}}" target="_blank">ID: {{ i[0] }}</a></h2>
-                <p>Published: {{i[1][1]}}</p>
-                <p>Last modified: {{i[1][2]}}</p>
-                <p>Score: {{ i[1][0] }}</p>
-                <p>Description: {{i[1][4]}}</p>
-                {% endif %}
-            {% endfor %}
+        <div class="cves">
+            <div class="lowSeverity">
+            <h1 style="text-align: center;">Low Severity (1.0 - 4.9)</h1>
+                {% for i in cve_list%}
+                    {% if i[1][0]  >= 4.9 and i[1][0] <= 1.0 %}
+                    <h2><a href="{{i[1][3]}}" target="_blank">ID: {{ i[0] }}</a></h2>
+                    <p>Published: {{i[1][1]}}</p>
+                    <p>Last modified: {{i[1][2]}}</p>
+                    <p>Score: {{ i[1][0] }}</p>
+                    <p>Description: {{i[1][4]}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="medSeverity">
+                <h1 style="text-align: center;">Medium Severity (5.0 - 8.9)</h1>
+                {% for i in cve_list%}
+                    {% if i[1][0]  >= 5.0 and i[1][0] <= 8.9 %}
+                    <h2><a href="{{i[1][3]}}" target="_blank">ID: {{ i[0] }}</a></h2>
+                    <p>Published: {{i[1][1]}}</p>
+                    <p>Last modified: {{i[1][2]}}</p>
+                    <p>Score: {{ i[1][0] }}</p>
+                    <p>Description: {{i[1][4]}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="highSeverity">
+                <h1 style="text-align: center;">High Severity (>9.0)</h1>
+                {% for i in cve_list%}
+                    {% if i[1][0]  >= 9.0 and i[1][0] <= 10.0 %}
+                    <h2><a href="{{i[1][3]}}" target="_blank">ID: {{ i[0] }}</a></h2>
+                    <p>Published: {{i[1][1]}}</p>
+                    <p>Last modified: {{i[1][2]}}</p>
+                    <p>Score: {{ i[1][0] }}</p>
+                    <p>Description: {{i[1][4]}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>
