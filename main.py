@@ -3,6 +3,10 @@ import feedparser
 import re
 import nvdlib
 import datetime
+import sys
+import os
+
+sys.path.append(os.path.expanduser("~/.local/lib/python{}.{}/site-packages".format(sys.version_info.major, sys.version_info.minor)))
 
 app = Flask(__name__)
 
@@ -80,4 +84,4 @@ def index():
                                         cve_list = cves.items())
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=443, debug=True)

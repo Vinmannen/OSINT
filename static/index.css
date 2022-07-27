@@ -61,7 +61,14 @@ body::-webkit-scrollbar-thumb {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 24px;
+  font-size: 28px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.buttonRed,.button-hover-red:hover {
+  color:#fff!important;
+  background-color:#f44336!important
 }
 
 .news_header hr{
