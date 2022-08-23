@@ -29,7 +29,7 @@ def index():
     nakedsec_news = feedparser.parse("http://feeds.feedburner.com/NakedSecurity")  
     nakedsec_entry = nakedsec_news.entries[0:4]
 
-    mandiant_news = feedparser.parse("https://www.mandiant.com/resources/rss.xml?type=article_blog")  
+    mandiant_news = feedparser.parse("https://www.mandiant.com/resources/blog/rss.xml")  
     mandiant_entry = mandiant_news.entries[0:4]
 
     bleeping_news = feedparser.parse("https://www.bleepingcomputer.com/feed/")  
